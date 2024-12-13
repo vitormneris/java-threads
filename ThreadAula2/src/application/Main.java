@@ -11,12 +11,15 @@ public class Main {
 	{
 		Runnable myRunnable = new MyRunnable();
 		
+		// Todas as threads usando o mesmo Runnable, o que causa a conrrência
+		// entre as threads
 		Thread thread0 = new Thread(myRunnable);
 		Thread thread1 = new Thread(myRunnable);
 		Thread thread2 = new Thread(myRunnable);
 		Thread thread3 = new Thread(myRunnable);
 		Thread thread4 = new Thread(myRunnable);
 
+		// Execução de múltiplas threads
 		thread0.start();
 		thread1.start();
 		thread2.start();
@@ -26,6 +29,8 @@ public class Main {
 	
 	static class MyRunnable implements Runnable 
 	{			
+		
+		// Objetos com a utilidade de eliminar a conrrência entre os synchronized
 		static Object lock1 = new Object();
 		static Object lock2 = new Object();
 	
@@ -33,12 +38,15 @@ public class Main {
 		@Override
 		public void run() 
 		{
-
 			String threadName = Thread.currentThread().getName();		
 			
 			int x;
 			int y;
 			
+			// Sincronizando o momento em a variável 'a' é incrementada
+			// e salvando seu valor no escopo do método
+			// dessa forma não há como a thread imprimir o valor errado da
+			// sua incrementação
 			synchronized(lock1) 
 			{
 				a = a  + 1;	

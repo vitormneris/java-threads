@@ -18,7 +18,8 @@ public class Main {
 		Thread t2 = new Thread(() -> {
 			System.out.println(Thread.currentThread().getName());
 		});
-		t2.start();
+		t2.start(); // Iniciando outra thread
+		// t2.start(); Não é possível iniciar duas vezes a mesma thread
 	}
 	
 	static class MeuRunnable implements Runnable {
